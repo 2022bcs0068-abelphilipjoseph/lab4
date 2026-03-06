@@ -4,7 +4,7 @@
 **Roll Number:** 2022bcs0068
 
 ## Objective
-[cite_start]This repository automates the entire machine learning model deployment workflow using GitHub Actions[cite: 3, 4]. [cite_start]It implements a Continuous Integration and Continuous Deployment (CI/CD) pipeline that automatically trains a model [cite: 31, 33][cite_start], evaluates it against a baseline [cite: 44][cite_start], and, if improved, containerizes and deploys the FastAPI inference service to Docker Hub[cite: 6, 7].
+This repository automates the entire machine learning model deployment workflow using GitHub Actions[cite: 3, 4]. [cite_start]It implements a Continuous Integration and Continuous Deployment (CI/CD) pipeline that automatically trains a model [cite: 31, 33][cite_start], evaluates it against a baseline [cite: 44][cite_start], and, if improved, containerizes and deploys the FastAPI inference service to Docker Hub[cite: 6, 7].
 
 ## Deliverable Links
 * **GitHub Repository:** [https://github.com/2022bcs0068-abelphilipjoseph/lab4](https://github.com/2022bcs0068-abelphilipjoseph/lab4)
@@ -17,20 +17,20 @@
 The workflow consists of two main jobs triggered on a push to the repository:
 
 ### 1. Continuous Integration (Train Job)
-* [cite_start]Sets up the Python 3.11 environment on an Ubuntu runner[cite: 32].
-* [cite_start]Executes the training script (`scripts/train.py`) to train a new model[cite: 33].
-* [cite_start]Captures the evaluation metrics and saves them to `metrics.json`[cite: 35, 36, 37].
-* [cite_start]Uploads the trained model and metrics as a GitHub Artifact for the deployment phase[cite: 38].
+* Sets up the Python 3.11 environment on an Ubuntu runner.
+* Executes the training script (`scripts/train.py`) to train a new model.
+* Captures the evaluation metrics and saves them to `metrics.json`.
+* Uploads the trained model and metrics as a GitHub Artifact for the deployment phase.
 
 ### 2. Continuous Deployment (Deploy Job)
-* [cite_start]Checks success of the train job using `needs: train`[cite: 41].
-* [cite_start]Downloads the model artifacts generated in the CI job[cite: 42].
-* [cite_start]**Metric Comparison:** Compares the newly trained model's current metric against the `BEST_Metric` variable stored in GitHub[cite: 43, 44].
-  * [cite_start]*If metrics do not improve:* The job terminates and outputs `<2022bcs0068:>----Metric did not improve`[cite: 45].
-  * [cite_start]*If metrics improve:* Proceeds to build the Docker image[cite: 48].
-* [cite_start]Logs into Docker Hub using configured secrets (`DOCKER_USERNAME` and `DOCKER_TOKEN`)[cite: 50].
-* [cite_start]Builds the image using the `Dockerfile` and pushes the FastAPI container image to Docker Hub so it can be pulled by servers[cite: 51, 53].
-* [cite_start]Updates the `Best Metrics` GitHub Variable to the new high score to set a harder target to beat for future runs[cite: 56].
+* Checks success of the train job using `needs: train`.
+* Downloads the model artifacts generated in the CI job[cite: 42].
+* **Metric Comparison:** Compares the newly trained model's current metric against the `BEST_Metric` variable stored in GitHub[cite: 43, 44].
+  * *If metrics do not improve:* The job terminates and outputs `<2022bcs0068:>----Metric did not improve`[cite: 45].
+  * *If metrics improve:* Proceeds to build the Docker image[cite: 48].
+* Logs into Docker Hub using configured secrets (`DOCKER_USERNAME` and `DOCKER_TOKEN`)[cite: 50].
+* Builds the image using the `Dockerfile` and pushes the FastAPI container image to Docker Hub so it can be pulled by servers[cite: 51, 53].
+* Updates the `Best Metrics` GitHub Variable to the new high score to set a harder target to beat for future runs[cite: 56].
 
 ---
 
