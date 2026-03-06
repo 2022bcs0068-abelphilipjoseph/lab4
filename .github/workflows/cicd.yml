@@ -30,8 +30,8 @@ jobs:
         with:
           name: model-artifacts
           path: |
-            model.pkl
-            metrics.json
+            outputs/model.pkl
+            outputs/metrics.json
 
   deploy:
     name: Continuous Deployment
