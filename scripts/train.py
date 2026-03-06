@@ -44,7 +44,7 @@ metrics = {
     "r2_score": r2
 }
 
-with open('outputs/results.json', 'w') as f:
+with open('outputs/metrics.json', 'w') as f:
     json.dump(metrics, f)
 
 # 6. Print to Standard Output (for GitHub Actions)
